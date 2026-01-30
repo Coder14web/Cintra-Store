@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cintra Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+
+body{
+  background:#000;
+  color:#e5e5e5;
+  overflow-x:hidden;
+}
+
+/* LOADER */
+#loader{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.loader-bar{
+  width:220px;
+  height:4px;
+  background:#333;
+}
+.loader-bar span{
+  display:block;
+  height:100%;
+  width:0;
+  background:#aaa;
+  animation:load 2s forwards;
+}
+@keyframes load{to{width:100%}}
+
+/* BACKGROUND WAVES */
+.waves{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%, #222 0%, transparent 45%),
+    radial-gradient(circle at 80% 60%, #1a1a1a 0%, transparent 45%),
+    radial-gradient(circle at 50% 90%, #2a2a2a 0%, transparent 50%);
+  z-index:-1;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.hero h1{
+  font-size:clamp(3rem,10vw,8rem);
+  font-weight:900;
+}
+.hero p{
+  margin-top:20px;
+  letter-spacing:3px;
+  color:#999;
+}
+
+/* SECTIONS */
+section{
+  max-width:1200px;
+  margin:auto;
+  padding:120px 20px;
+}
+section h2{
+  font-size:2.8rem;
+  margin-bottom:60px;
+}
+
+/* CAROUSEL */
+.carousel-wrapper{overflow-x:auto;scroll-snap-type:x mandatory;}
+.carousel{
+  display:flex;
+  gap:30px;
+  padding:40px;
+}
+.card{
+  min-width:260px;
+  height:220px;
+  border:1px solid #333;
+  padding:20px;
+  cursor:pointer;
+  scroll-snap-align:center;
+  transition:.3s;
+}
+.card:hover{border-color:#aaa;}
+.card h3{margin-bottom:10px;}
+.card p{color:#aaa;font-size:.9rem}
+
+/* WHY */
+.why{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:40px;
+}
+.why div{
+  border-left:2px solid #333;
+  padding-left:20px;
+  cursor:pointer;
+  transition:.3s;
+}
+.why div:hover{color:#aaa}
+
+/* PROCESS */
+.process{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:40px;
+}
+.step span{
+  font-size:3rem;
+  font-weight:900;
+  color:#333;
+}
+
+/* MODALS */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.95);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.modal{
+  border:1px solid #444;
+  padding:50px;
+  max-width:420px;
+  width:90%;
+  text-align:center;
+}
+.price{
+  font-size:2.4rem;
+  font-weight:900;
+  margin:20px 0;
+}
+.buy-btn{
+  background:#aaa;
+  color:#000;
+  border:none;
+  padding:10px 26px;
+  font-size:.9rem;
+  font-weight:600;
+  cursor:pointer;
+}
+.close{
+  margin-top:25px;
+  display:block;
+  color:#777;
+  cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+  padding:60px 20px;
+  border-top:1px solid #222;
+  text-align:center;
+  color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-bar"><span></span></div>
+</div>
+
+<div class="waves"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <h1>CINTRA STORE</h1>
+    <p>WEB DESIGN • LOGOS • FIXES</p>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section>
+<h2>Services</h2>
+
+<div class="carousel-wrapper">
+<div class="carousel">
+
+<div class="card" onclick="openService('Website Creation','Modern responsive websites focused on performance and clean design.','$299')">
+<h3>Website Creation</h3>
+<p>Modern responsive websites.</p>
+</div>
+
+<div class="card" onclick="openService('Logo Design','Minimal and memorable brand identities.','$149')">
+<h3>Logo Design</h3>
+<p>Clean and professional logos.</p>
+</div>
+
+<div class="card" onclick="openService('Website Fix','Bug fixes, optimization and improvements.','$99')">
+<h3>Website Fix</h3>
+<p>Corrections and improvements.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- WHY -->
+<section>
+<h2>Why Choose Us</h2>
+<div class="why">
+  <div onclick="openInfo('Modern Design','We focus on clean, minimal and timeless designs that never feel outdated.')">Modern Design</div>
+  <div onclick="openInfo('Fast Delivery','We respect deadlines and keep constant communication during the project.')">Fast Delivery</div>
+  <div onclick="openInfo('High Performance','Our websites are optimized for speed, SEO and responsiveness.')">High Performance</div>
+  <div onclick="openInfo('Direct Communication','You talk directly with the developer, no intermediaries or delays.')">Direct Communication</div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section>
+<h2>Our Process</h2>
+<div class="process">
+  <div class="step"><span>01</span><p>Briefing</p></div>
+  <div class="step"><span>02</span><p>Design</p></div>
+  <div class="step"><span>03</span><p>Development</p></div>
+  <div class="step"><span>04</span><p>Delivery</p></div>
+</div>
+</section>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<footer>© 2026 Cintra Store — All rights reserved</footer>
+
+<script>
+setTimeout(()=>loader.style.display="none",2200);
+
+const overlay=document.getElementById("overlay");
+const modal=document.getElementById("modalContent");
+
+function openService(title,desc,price){
+  modal.innerHTML=`
+    <h2>${title}</h2>
+    <p>${desc}</p>
+    <div class="price">${price}</div>
+    <button class="buy-btn">BUY NOW</button>
+    <span class="close" onclick="closeModal()">Close</span>
+  `;
+  overlay.style.display="flex";
+}
+
+function openInfo(title,text){
+  modal.innerHTML=`
+    <h2>${title}</h2>
+    <p>${text}</p>
+    <span class="close" onclick="closeModal()">Close</span>
+  `;
+  overlay.style.display="flex";
+}
+
+function closeModal(){
+  overlay.style.display="none";
+}
+</script>
+
+</body>
+</html>
